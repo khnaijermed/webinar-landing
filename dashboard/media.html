@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="robots" content="noindex, nofollow" />
+<title>الوسائط — لوحة التحكم</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Cairo:wght@400;600;700;800&display=swap" />
+<link rel="stylesheet" href="./css/dashboard.css" />
+</head>
+<body>
+<main class="main">
+
+  <div class="page-head">
+    <div>
+      <h1 class="page-title">إدارة الوسائط</h1>
+      <p class="page-sub">رفع وحذف الصور والفيديوهات. تحديد الفيديو الرئيسي وإضافة نصوص بديلة للصور.</p>
+    </div>
+    <div class="page-actions">
+      <div class="segment" role="tablist">
+        <button data-filter="all"   class="is-active" type="button">الكل</button>
+        <button data-filter="image" type="button">صور</button>
+        <button data-filter="video" type="button">فيديو</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="dropzones">
+    <label class="dropzone" id="dz-image">
+      <div class="dropzone-icon">🖼️</div>
+      <p class="dropzone-title">رفع صورة</p>
+      <p class="dropzone-sub">jpg, png, webp · حتى 5MB</p>
+      <input type="file" accept="image/jpeg,image/png,image/webp" />
+    </label>
+    <label class="dropzone" id="dz-video">
+      <div class="dropzone-icon">🎬</div>
+      <p class="dropzone-title">رفع فيديو</p>
+      <p class="dropzone-sub">mp4, webm · حتى 100MB</p>
+      <input type="file" accept="video/mp4,video/webm" />
+    </label>
+  </div>
+
+  <div style="margin:-6px 0 22px;text-align:center">
+    <button class="btn btn-ghost" id="add-external-btn" type="button">+ إضافة فيديو خارجي (YouTube / Vimeo / CDN)</button>
+  </div>
+
+  <div class="media-grid" id="grid"></div>
+  <div class="empty" id="empty-state" hidden>
+    <div class="empty-icon">📂</div>
+    <p class="empty-title">لا توجد ملفات بعد</p>
+    <p class="empty-sub">ارفع صورة أو فيديو لتبدأ.</p>
+  </div>
+
+</main>
+<script type="module" src="./js/media.js"></script>
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="robots" content="noindex, nofollow" />
+<title>إعدادات التصميم — لوحة التحكم</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Cairo:wght@400;600;700;800&family=Tajawal:wght@400;500;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Almarai:wght@400;700;800&family=Noto+Kufi+Arabic:wght@400;600;700;800&display=swap" />
+<link rel="stylesheet" href="./css/dashboard.css" />
+</head>
+<body>
+<main class="main">
+
+  <div class="page-head">
+    <div>
+      <h1 class="page-title">إعدادات التصميم</h1>
+      <p class="page-sub">الألوان والخطوط، إعدادات الفيديو، الأزرار الثابتة، الواتساب، ونصوص نموذج التسجيل. التغييرات تظهر مباشرة على صفحة الهبوط.</p>
+    </div>
+    <div class="page-actions">
+      <button class="btn" id="save-btn" type="button">حفظ التغييرات</button>
+    </div>
+  </div>
+
+  <form id="design-form">
+
+    <!-- COLORS -->
+    <div class="card">
+      <h2 class="card-title">الألوان</h2>
+      <div class="color-grid">
+        <div class="color-row"><label>لون أساسي (Primary)</label><div class="color-row-end"><input type="text" data-mirror="primary_color" /><input type="color" name="primary_color" /></div></div>
+        <div class="color-row"><label>لون ثانوي (Secondary)</label><div class="color-row-end"><input type="text" data-mirror="secondary_color" /><input type="color" name="secondary_color" /></div></div>
+        <div class="color-row"><label>خلفية الموقع</label><div class="color-row-end"><input type="text" data-mirror="background_color" /><input type="color" name="background_color" /></div></div>
+        <div class="color-row"><label>خلفية الأقسام</label><div class="color-row-end"><input type="text" data-mirror="section_background" /><input type="color" name="section_background" /></div></div>
+        <div class="color-row"><label>خلفية البطاقات</label><div class="color-row-end"><input type="text" data-mirror="card_background" /><input type="color" name="card_background" /></div></div>
+        <div class="color-row"><label>لون النصوص</label><div class="color-row-end"><input type="text" data-mirror="text_color" /><input type="color" name="text_color" /></div></div>
+        <div class="color-row"><label>لون العناوين</label><div class="color-row-end"><input type="text" data-mirror="heading_color" /><input type="color" name="heading_color" /></div></div>
+        <div class="color-row"><label>لون الحدود</label><div class="color-row-end"><input type="text" data-mirror="border_color" /><input type="color" name="border_color" /></div></div>
+      </div>
+    </div>
+
+    <!-- TYPOGRAPHY -->
+    <div class="card">
+      <h2 class="card-title">الخطوط والأحجام</h2>
+      <div class="field">
+        <label>الخط العربي</label>
+        <select name="font_family">
+          <option value="'Cairo', sans-serif">Cairo</option>
+          <option value="'Tajawal', sans-serif">Tajawal</option>
+          <option value="'IBM Plex Sans Arabic', sans-serif">IBM Plex Sans Arabic</option>
+          <option value="'Almarai', sans-serif">Almarai</option>
+          <option value="'Noto Kufi Arabic', sans-serif">Noto Kufi Arabic</option>
+        </select>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>حجم عنوان الـ Hero</label><input type="text" name="hero_title_size" dir="ltr" placeholder="68px" /></div>
+        <div class="field"><label>حجم عناوين الأقسام</label><input type="text" name="section_title_size" dir="ltr" placeholder="44px" /></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>حجم النص العادي</label><input type="text" name="body_text_size" dir="ltr" placeholder="17px" /></div>
+        <div class="field"><label>تباعد الفقرات (line-height)</label><input type="text" name="paragraph_spacing" dir="ltr" placeholder="1.7" /></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>تباعد الأقسام</label><input type="text" name="section_spacing" dir="ltr" placeholder="90px" /></div>
+        <div class="field"></div>
+      </div>
+    </div>
+
+    <!-- VIDEO PLAYER -->
+    <div class="card">
+      <h2 class="card-title">إعدادات الفيديو</h2>
+      <p class="card-sub">تنطبق على الفيديوهات المرفوعة (HTML5). الفيديوهات الخارجية (YouTube) تستعمل إعدادات الرابط.</p>
+      <div class="field-row">
+        <div class="field"><label>عرض الفيديو</label><input type="text" name="video_width" dir="ltr" placeholder="960px" /></div>
+        <div class="field"><label>ارتفاع الفيديو</label><input type="text" name="video_height" dir="ltr" placeholder="540px" /></div>
+      </div>
+      <div class="field">
+        <label>صورة Poster (URL)</label>
+        <input type="text" name="video_poster_url" dir="ltr" placeholder="https://…/poster.jpg" />
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label class="switch-label">
+            <span class="switch"><input type="checkbox" name="video_controls" /><span class="switch-track"></span></span>
+            عرض أزرار التحكم Controls
+          </label>
+        </div>
+        <div class="field">
+          <label class="switch-label">
+            <span class="switch"><input type="checkbox" name="video_autoplay" /><span class="switch-track"></span></span>
+            تشغيل تلقائي Autoplay
+          </label>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label class="switch-label">
+            <span class="switch"><input type="checkbox" name="video_muted" /><span class="switch-track"></span></span>
+            كتم الصوت Muted
+          </label>
+        </div>
+        <div class="field">
+          <label class="switch-label">
+            <span class="switch"><input type="checkbox" name="video_loop" /><span class="switch-track"></span></span>
+            تكرار Loop
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- LAYOUT -->
+    <div class="card">
+      <h2 class="card-title">التخطيط</h2>
+      <div class="field-row">
+        <div class="field"><label>زاوية الأزرار (radius)</label><input type="text" name="button_radius" dir="ltr" placeholder="12px" /></div>
+        <div class="field"><label>زاوية البطاقات (radius)</label><input type="text" name="card_radius" dir="ltr" placeholder="16px" /></div>
+      </div>
+      <div class="field">
+        <label class="switch-label">
+          <span class="switch"><input type="checkbox" name="shadow_enabled" /><span class="switch-track"></span></span>
+          تفعيل الظلال
+        </label>
+      </div>
+    </div>
+
+    <!-- STICKY BOOKING BUTTON -->
+    <div class="card">
+      <h2 class="card-title">زر الحجز الثابت (Sticky CTA)</h2>
+      <p class="card-sub">يظهر أسفل الشاشة عند التمرير، خصوصًا على الهاتف. يتم النقر للانتقال إلى نموذج التسجيل.</p>
+      <div class="field">
+        <label class="switch-label">
+          <span class="switch"><input type="checkbox" name="sticky_cta_enabled" /><span class="switch-track"></span></span>
+          تفعيل الزر الثابت
+        </label>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>نص الزر</label><input type="text" name="sticky_cta_text" placeholder="احجز مقعدك الآن" /></div>
+        <div class="field"><label>الرابط الداخلي</label><input type="text" name="sticky_cta_link" dir="ltr" placeholder="#register" /></div>
+      </div>
+    </div>
+
+    <!-- FLOATING FAQ BUTTON -->
+    <div class="card">
+      <h2 class="card-title">زر الأسئلة الشائعة الثابت</h2>
+      <p class="card-sub">يفتح Popup داخل الصفحة دون الانتقال إلى صفحة أخرى.</p>
+      <div class="field">
+        <label class="switch-label">
+          <span class="switch"><input type="checkbox" name="faq_button_enabled" /><span class="switch-track"></span></span>
+          تفعيل الزر الثابت
+        </label>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>نص الزر (tooltip)</label><input type="text" name="faq_button_text" placeholder="الأسئلة الشائعة" /></div>
+        <div class="field">
+          <label>الموقع</label>
+          <select name="faq_button_position">
+            <option value="left">يسار</option>
+            <option value="right">يمين</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label class="switch-label">
+          <span class="switch"><input type="checkbox" name="faq_popup_enabled" /><span class="switch-track"></span></span>
+          إظهار FAQ كقسم داخل الصفحة أيضًا
+        </label>
+      </div>
+    </div>
+
+    <!-- WHATSAPP -->
+    <div class="card">
+      <h2 class="card-title">واتساب</h2>
+      <div class="field">
+        <label class="switch-label">
+          <span class="switch"><input type="checkbox" name="whatsapp_enabled" /><span class="switch-track"></span></span>
+          تفعيل زر واتساب
+        </label>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>رقم واتساب (مع رمز الدولة)</label><input type="tel" name="whatsapp_number" dir="ltr" placeholder="+212600000000" /></div>
+        <div class="field">
+          <label>موقع الزر</label>
+          <select name="whatsapp_position">
+            <option value="right">يمين</option>
+            <option value="left">يسار</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label>رسالة افتراضية</label>
+        <textarea name="whatsapp_message" rows="3" placeholder="السلام عليكم، أريد الاستفسار عن الويبنار…"></textarea>
+      </div>
+    </div>
+
+    <!-- REGISTRATION FORM TEXT -->
+    <div class="card">
+      <h2 class="card-title">نصوص نموذج التسجيل</h2>
+      <p class="card-sub">العناوين والرسائل التي يراها المستخدم في نموذج الحجز. لتعديل الحقول نفسها استعمل قسم "الأقسام" → نموذج التسجيل.</p>
+      <div class="field-row">
+        <div class="field"><label>عنوان النموذج</label><input type="text" name="form_title" /></div>
+        <div class="field"><label>نص زر الإرسال</label><input type="text" name="form_submit_text" /></div>
+      </div>
+      <div class="field">
+        <label>وصف فوق النموذج</label>
+        <textarea name="form_description" rows="2"></textarea>
+      </div>
+      <div class="field">
+        <label>رسالة النجاح</label>
+        <textarea name="form_success_message" rows="2"></textarea>
+      </div>
+      <div class="field">
+        <label>رسالة الخطأ</label>
+        <textarea name="form_error_message" rows="2"></textarea>
+      </div>
+    </div>
+
+  </form>
+
+</main>
+<script type="module" src="./js/design.js"></script>
+</body>
+</html>

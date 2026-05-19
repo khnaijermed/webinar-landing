@@ -1,0 +1,17 @@
+# macOS
+.DS_Store
+
+# Claude Code / local agent state
+.claude/
+audit.jsonl
+.audit-key
+
+# Outdated duplicate / empty
+Public Landing Page/
+outputs/
+
+# Editor & OS junk
+Thumbs.db
+*.swp
+.idea/
+.vscode/

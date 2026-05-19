@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="robots" content="noindex, nofollow" />
+<title>الأقسام — لوحة التحكم</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Cairo:wght@400;600;700;800&display=swap" />
+<link rel="stylesheet" href="./css/dashboard.css" />
+</head>
+<body>
+<main class="main">
+
+  <div class="page-head">
+    <div>
+      <h1 class="page-title">إدارة الأقسام</h1>
+      <p class="page-sub">عرض وتعديل أقسام الصفحة، إخفاء/إظهار، وإعادة الترتيب بالسحب والإفلات.</p>
+    </div>
+    <div class="page-actions">
+      <button class="btn btn-ghost" id="new-page-btn" type="button">+ صفحة جديدة</button>
+      <button class="btn" id="new-section-btn" type="button" hidden>+ قسم جديد</button>
+    </div>
+  </div>
+
+  <div class="card" id="page-picker-card">
+    <h2 class="card-title">اختر الصفحة</h2>
+    <p class="card-sub">الأقسام تنتمي إلى صفحة. اختر صفحة لإدارة أقسامها.</p>
+    <div class="field" style="margin-bottom:0">
+      <select id="page-select"></select>
+    </div>
+  </div>
+
+  <div class="card" id="sections-card" hidden>
+    <h2 class="card-title">الأقسام</h2>
+    <p class="card-sub">اسحب من المقبض لإعادة الترتيب. الترتيب يُحفظ تلقائيًا.</p>
+    <div class="section-list" id="section-list"></div>
+    <div class="empty" id="sections-empty" hidden>
+      <div class="empty-icon">🧩</div>
+      <p class="empty-title">لا توجد أقسام بعد</p>
+      <p class="empty-sub">اضغط "+ قسم جديد" لإضافة أول قسم.</p>
+    </div>
+  </div>
+
+</main>
+<script type="module" src="./js/sections.js"></script>
+</body>
+</html>

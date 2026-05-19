@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="robots" content="noindex, nofollow" />
+<title>قائمة التنقل — لوحة التحكم</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Cairo:wght@400;600;700;800&display=swap" />
+<link rel="stylesheet" href="./css/dashboard.css" />
+</head>
+<body>
+<main class="main">
+
+  <div class="page-head">
+    <div>
+      <h1 class="page-title">قائمة التنقل</h1>
+      <p class="page-sub">إدارة روابط القائمة الرئيسية في صفحة الهبوط: تسمية، رابط الهدف، إظهار/إخفاء، وإعادة الترتيب.</p>
+    </div>
+    <div class="page-actions">
+      <button class="btn" id="new-menu-btn" type="button">+ رابط جديد</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="card-sub">اسحب من المقبض لإعادة الترتيب. الترتيب يُحفظ تلقائيًا. استعمل <code dir="ltr">#section-id</code> للروابط الداخلية، أو <code dir="ltr">https://…</code> للروابط الخارجية.</p>
+    <div class="section-list" id="menu-list"></div>
+    <div class="empty" id="empty-state" hidden>
+      <div class="empty-icon">🧭</div>
+      <p class="empty-title">لا توجد روابط بعد</p>
+      <p class="empty-sub">اضغط "+ رابط جديد" لإضافة أول رابط.</p>
+    </div>
+  </div>
+
+</main>
+<script type="module" src="./js/menu.js"></script>
+</body>
+</html>

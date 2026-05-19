@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="robots" content="noindex, nofollow" />
+<title>الدخول — لوحة التحكم</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Cairo:wght@400;600;700;800&display=swap" />
+<link rel="stylesheet" href="./css/dashboard.css" />
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="logo10x10-dark" viewBox="0 0 814.414 209.155">
+      <polygon style="fill:#E8E8E8" points="346.492 83.746 274.616 .503 348.326 .503 383.347 41.064 346.492 83.746"/>
+      <path style="fill:#E8E8E8" d="M94.374,24.604V.124h-39.519C47.776,25.489,33.62,32.271,0,32.568v34.209h39.519v142.151h54.855v-24.376c-17.448-21.999-27.907-49.78-27.907-79.974s10.459-57.975,27.907-79.974Z"/>
+      <path style="fill:#E8E8E8" d="M195.424,208.655c57.389,0,104.078-46.689,104.078-104.078S252.812.5,195.424.5s-104.078,46.689-104.078,104.078,46.689,104.078,104.078,104.078ZM195.424,50.258c29.952,0,54.319,24.367,54.319,54.32s-24.367,54.319-54.319,54.319-54.319-24.367-54.319-54.319,24.367-54.32,54.319-54.32Z"/>
+      <path style="fill:#39b54a" d="M608.787,24.604V.124h-39.519c-7.078,25.365-21.235,32.147-54.855,32.443v34.209h39.519v142.151h54.855v-24.376c-17.448-21.999-27.907-49.78-27.907-79.974s10.459-57.975,27.907-79.974Z"/>
+      <path style="fill:#39b54a;stroke:#39b54a;stroke-miterlimit:10" d="M709.836,208.655c57.389,0,104.078-46.689,104.078-104.078S767.225.5,709.836.5s-104.078,46.689-104.078,104.078,46.689,104.078,104.078,104.078ZM709.836,50.258c29.952,0,54.319,24.367,54.319,54.32s-24.367,54.319-54.319,54.319-54.32-24.367-54.32-54.319,24.367-54.32,54.32-54.32Z"/>
+      <polyline style="fill:#39b54a" points="438.031 104.399 527.734 .5 454.022 .5 401.174 61.713 364.32 104.399 364.317 104.395 346.528 125.062 274.58 208.647 347.823 208.647 383.329 167.619 438.031 104.399"/>
+      <polygon style="fill:#E8E8E8" points="456.218 125.095 527.734 208.647 454.025 208.329 419.18 167.618 456.218 125.095"/>
+    </symbol>
+  </defs>
+</svg>
+
+<main class="login-wrap">
+  <form class="login-card" id="login-form" novalidate>
+    <div class="login-brand">
+      <svg viewBox="0 0 814.414 209.155"><use href="#logo10x10-dark"/></svg>
+    </div>
+    <h1 class="login-title">لوحة التحكم</h1>
+    <p class="login-sub">سجّل دخولك للوصول إلى بيانات التسجيلات</p>
+
+    <div class="field">
+      <label for="email">البريد الإلكتروني</label>
+      <input id="email" name="email" type="email" autocomplete="email" required placeholder="admin@example.com" dir="ltr" style="text-align:right" />
+    </div>
+    <div class="field">
+      <label for="password">كلمة المرور</label>
+      <input id="password" name="password" type="password" autocomplete="current-password" required placeholder="••••••••" dir="ltr" style="text-align:right" />
+    </div>
+
+    <button class="btn" type="submit" id="login-btn">دخول</button>
+    <div class="form-msg" id="login-msg" role="status" aria-live="polite"></div>
+  </form>
+</main>
+
+<script type="module" src="./js/login.js"></script>
+</body>
+</html>

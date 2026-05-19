@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="robots" content="noindex, nofollow" />
+<title>لوحة التحكم — نظرة عامة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Cairo:wght@400;600;700;800&display=swap" />
+<link rel="stylesheet" href="./css/dashboard.css" />
+</head>
+<body>
+<main class="main">
+  <div class="page-head">
+    <div>
+      <h1 class="page-title">نظرة عامة</h1>
+      <p class="page-sub">ملخص محتوى الموقع، الوسائط، الأزرار الثابتة، والمسجَّلين.</p>
+    </div>
+  </div>
+
+  <section class="stats-grid">
+    <div class="stat"><div class="stat-label">Leads</div>           <div class="stat-num" id="stat-leads">0</div>      <div class="stat-sub">إجمالي المسجلين</div></div>
+    <div class="stat"><div class="stat-label">Today</div>           <div class="stat-num" id="stat-today">0</div>      <div class="stat-sub">تسجيلات اليوم</div></div>
+    <div class="stat"><div class="stat-label">Active Sections</div> <div class="stat-num" id="stat-sections">0</div>   <div class="stat-sub">أقسام نشطة على الصفحة</div></div>
+    <div class="stat"><div class="stat-label">FAQs</div>            <div class="stat-num" id="stat-faqs">0</div>       <div class="stat-sub">أسئلة شائعة نشطة</div></div>
+  </section>
+
+  <section class="stats-grid">
+    <div class="stat"><div class="stat-label">Videos</div>       <div class="stat-num" id="stat-videos">0</div>     <div class="stat-sub">فيديوهات في المكتبة</div></div>
+    <div class="stat"><div class="stat-label">Images</div>       <div class="stat-num" id="stat-images">0</div>     <div class="stat-sub">صور في المكتبة</div></div>
+    <div class="stat"><div class="stat-label">Form Fields</div>  <div class="stat-num" id="stat-fields">0</div>     <div class="stat-sub">حقول نموذج التسجيل</div></div>
+    <div class="stat"><div class="stat-label">Latest</div>       <div class="stat-num" id="stat-latest" style="font-size:22px">—</div><div class="stat-sub">آخر تسجيل</div></div>
+  </section>
+
+  <section class="stats-grid">
+    <div class="stat"><div class="stat-label">WhatsApp</div>     <div class="stat-num" id="stat-wa"   style="font-size:20px">—</div><div class="stat-sub">حالة زر واتساب</div></div>
+    <div class="stat"><div class="stat-label">Sticky CTA</div>   <div class="stat-num" id="stat-cta"  style="font-size:20px">—</div><div class="stat-sub">حالة زر الحجز الثابت</div></div>
+    <div class="stat"><div class="stat-label">FAQ Button</div>   <div class="stat-num" id="stat-faqb" style="font-size:20px">—</div><div class="stat-sub">حالة زر FAQ الثابت</div></div>
+    <div class="stat"><div class="stat-label">Form</div>         <div class="stat-num" id="stat-form" style="font-size:20px">—</div><div class="stat-sub">حالة نموذج التسجيل</div></div>
+  </section>
+</main>
+
+<script type="module" src="./js/dashboard.js"></script>
+</body>
+</html>
