@@ -141,6 +141,28 @@ img,svg{display:block;max-width:100%}
   border-radius:var(--radius-sm);cursor:pointer;
 }
 
+/* Show/hide password toggle (eye icon inside the password input) */
+.input-with-toggle{position:relative}
+.input-with-toggle input{padding-inline-end:46px}
+.password-toggle{
+  position:absolute;inset-inline-end:6px;top:50%;transform:translateY(-50%);
+  background:transparent;border:none;color:var(--text-3);
+  width:34px;height:34px;border-radius:var(--radius-sm);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;padding:0;
+  transition:color .15s ease, background .15s ease;
+}
+.password-toggle:hover,
+.password-toggle:focus-visible{color:var(--text);background:rgba(255,255,255,.06);outline:none}
+.password-toggle svg{
+  width:20px;height:20px;
+  stroke:currentColor;fill:none;
+  stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;
+}
+.password-toggle .eye-off{display:none}
+.password-toggle.is-on .eye-on{display:none}
+.password-toggle.is-on .eye-off{display:block}
+
 /* ============================================================
    LOGIN  (no sidebar)
    ============================================================ */

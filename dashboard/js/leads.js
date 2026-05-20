@@ -4,6 +4,40 @@ import Papa from 'https://cdn.jsdelivr.net/npm/papaparse@5.4.1/+esm';
 
 await initLayout({ active: 'leads' });
 
+/* Delegated handler for the password show/hide toggle.
+   - Toggles the same input's type between 'password' and 'text'
+   - Preserves the typed value (some browsers blank password inputs on
+     type swap because of autofill heuristics, so we save+restore).
+   - Restores caret position so the user keeps typing where they were. */
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest && e.target.closest('[data-toggle-password]');
+  if (!btn) return;
+  e.preventDefault();
+  const wrap = btn.closest('.input-with-toggle') || btn.parentElement;
+  const pw   = wrap && wrap.querySelector('input[name="password"]');
+  if (!pw) return;
+
+  const savedValue = pw.value;
+  const savedStart = pw.selectionStart;
+  const savedEnd   = pw.selectionEnd;
+  const wasFocused = document.activeElement === pw;
+
+  pw.type = pw.type === 'password' ? 'text' : 'password';
+
+  // Restore value if the type change blanked it
+  if (pw.value !== savedValue) pw.value = savedValue;
+  // Restore caret + focus so the user keeps typing in place
+  if (wasFocused) {
+    pw.focus();
+    try { pw.setSelectionRange(savedStart, savedEnd); } catch { /* setSelectionRange fails on type=email/etc., not type=text */ }
+  }
+
+  const revealed = pw.type === 'text';
+  btn.classList.toggle('is-on', revealed);
+  btn.setAttribute('aria-pressed', revealed ? 'true' : 'false');
+  btn.setAttribute('title', revealed ? 'إخفاء كلمة المرور' : 'إظهار كلمة المرور');
+});
+
 let all = [];
 let sortKey = 'created_at';
 let sortDir = 'desc';
@@ -141,9 +175,13 @@ tbody.addEventListener('click', async e => {
 
 function openMemberModal(member) {
   const isNew = !member;
+  const isAdmin = member && member.role === 'Administrator';
+  const passwordHelp = isNew
+    ? 'إذا كان الدور <strong>Administrator</strong>، فإن كلمة المرور إلزامية وستُستعمل لتسجيل الدخول إلى لوحة التحكم.'
+    : 'اتركها فارغة للإبقاء على كلمة المرور الحالية. أدخل قيمة جديدة لتغييرها.';
   openModal(`
     <div class="modal-head">
-      <h3 class="modal-title">${isNew ? 'إضافة عضو' : 'تعديل العضو'}</h3>
+      <h3 class="modal-title">${isNew ? 'إضافة عضو' : 'تعديل العضو'}${isAdmin ? ' — Administrator' : ''}</h3>
       <button class="modal-close" data-act="close" type="button">×</button>
     </div>
     <form>
@@ -153,15 +191,29 @@ function openMemberModal(member) {
       </div>
       <div class="field-row">
         <div class="field"><label>الهاتف</label><input name="phone" type="tel" dir="ltr" value="${escapeAttr(member?.phone || '')}" placeholder="+212600000000" /></div>
-        <div class="field"><label>المصدر</label><input name="source" type="text" value="${escapeAttr(member?.source || 'manual')}" /></div>
+        <div class="field">
+          <label>الدور</label>
+          <select name="role">
+            <option value="Member"        ${(!member || member.role === 'Member')      ? 'selected' : ''}>Member</option>
+            <option value="Administrator" ${ member && member.role === 'Administrator' ? 'selected' : ''}>Administrator</option>
+          </select>
+        </div>
       </div>
       <div class="field">
-        <label>الدور</label>
-        <select name="role">
-          <option value="Member"        ${(!member || member.role === 'Member')         ? 'selected' : ''}>Member</option>
-          <option value="Administrator" ${ member && member.role === 'Administrator'    ? 'selected' : ''}>Administrator</option>
-        </select>
+        <label>كلمة المرور</label>
+        <div class="input-with-toggle">
+          <input name="password" type="password" minlength="6" autocomplete="new-password"
+                 dir="ltr" style="text-align:right"
+                 placeholder="${isNew ? '6 أحرف على الأقل' : '••••••••'}" />
+          <button type="button" class="password-toggle" data-toggle-password
+                  aria-label="إظهار/إخفاء كلمة المرور" title="إظهار كلمة المرور">
+            <svg class="eye-on"  viewBox="0 0 24 24" aria-hidden="true"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
+            <svg class="eye-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+          </button>
+        </div>
+        <p style="color:var(--text-3);font-size:12px;margin:6px 0 0">${passwordHelp}</p>
       </div>
+      ${isNew ? `<div class="field"><label>المصدر</label><input name="source" type="text" value="manual" /></div>` : ''}
       <div class="modal-foot">
         <button class="btn btn-ghost" data-act="close" type="button">إلغاء</button>
         <button class="btn" type="submit">${isNew ? 'إضافة' : 'حفظ'}</button>
@@ -169,18 +221,67 @@ function openMemberModal(member) {
     </form>`, {
     onSubmit: async (form) => {
       const fd = new FormData(form);
-      const payload = {
-        full_name: fd.get('full_name').trim(),
-        email:     fd.get('email').trim(),
-        phone:     (fd.get('phone') || '').trim() || null,
-        source:    (fd.get('source') || '').trim() || 'manual',
-        role:      fd.get('role') === 'Administrator' ? 'Administrator' : 'Member',
-      };
-      const res = isNew
-        ? await supabase.from('leads').insert(payload)
-        : await supabase.from('leads').update(payload).eq('id', member.id);
-      if (res.error) { toast(res.error.message, 'error'); return false; }
-      toast(isNew ? 'تمت الإضافة' : 'تم الحفظ', 'success');
+      const full_name = (fd.get('full_name') || '').trim();
+      const email     = (fd.get('email')     || '').trim();
+      const phone     = (fd.get('phone')     || '').trim() || null;
+      const role      = fd.get('role') === 'Administrator' ? 'Administrator' : 'Member';
+      const password  = (fd.get('password')  || '').trim();
+
+      if (!full_name) { toast('الاسم مطلوب', 'error'); return false; }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { toast('بريد إلكتروني غير صالح', 'error'); return false; }
+      if (password && password.length < 6) {
+        toast('كلمة المرور يجب أن تكون 6 أحرف على الأقل', 'error'); return false;
+      }
+
+      /* ---------- EDIT ---------- */
+      if (!isNew) {
+        const emailChanged = email.toLowerCase() !== (member.email || '').toLowerCase();
+        const needsServer  = emailChanged || password.length > 0 ||
+                             (role === 'Administrator' && member.role !== 'Administrator');
+
+        if (needsServer) {
+          const { data, error } = await supabase.functions.invoke('update_member', {
+            body: { member_id: member.id, full_name, email, phone, role, password },
+          });
+          if (error || data?.error) {
+            toast((data?.error || error?.message || 'تعذّر تحديث العضو'), 'error');
+            return false;
+          }
+          toast('تم الحفظ', 'success'); load(); return;
+        }
+
+        // Pure leads-row edit (no auth-side change required)
+        const { error } = await supabase.from('leads')
+          .update({ full_name, phone, role })
+          .eq('id', member.id);
+        if (error) { toast(error.message, 'error'); return false; }
+        toast('تم الحفظ', 'success'); load(); return;
+      }
+
+      /* ---------- NEW ---------- */
+      if (role === 'Administrator' || password) {
+        if (!password || password.length < 6) {
+          toast('كلمة المرور مطلوبة لإنشاء Administrator', 'error');
+          return false;
+        }
+        const { data, error } = await supabase.functions.invoke('create_member', {
+          body: { full_name, email, password, phone, role },
+        });
+        if (error || data?.error) {
+          toast((data?.error || error?.message || 'تعذّر إنشاء العضو'), 'error');
+          return false;
+        }
+        toast('تمت الإضافة — يمكن للعضو الآن تسجيل الدخول', 'success');
+        load();
+        return;
+      }
+
+      // NEW Member with no password → plain leads row, no auth user
+      const source = (fd.get('source') || '').trim() || 'manual';
+      const { error } = await supabase.from('leads')
+        .insert({ full_name, email, phone, source, role });
+      if (error) { toast(error.message, 'error'); return false; }
+      toast('تمت الإضافة', 'success');
       load();
     }
   });
